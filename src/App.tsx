@@ -91,13 +91,13 @@ export default function App() {
         {/* Massive Branded Header */}
         <div className="z-10 text-center flex flex-col items-center">
           <h1 
-            className="text-white font-black text-[220px] leading-[0.8] tracking-tighter uppercase italic mb-12 drop-shadow-[0_20px_20px_rgba(0,0,0,0.5)]"
+            className="text-white font-black text-[250px] leading-[0.7] tracking-tighter uppercase italic mb-16 drop-shadow-[5px_25px_35px_rgba(0,0,0,0.8)]"
           >
             CHEERS O BAR
           </h1>
-          <div className="bg-amber-600 text-white font-black text-5xl px-20 py-8 rounded-full border-[10px] border-white/30 shadow-[0_0_80px_rgba(217,119,6,0.5)]">
-            <span className="text-white mr-12 tracking-widest">RÉGUA = 1 GIRO</span>
-            <span className="text-white tracking-widest">METRO = 2 GIROS</span>
+          <div className="bg-amber-600 text-white font-black text-6xl px-24 py-10 rounded-full border-[12px] border-white/40 shadow-[0_0_100px_rgba(217,119,6,0.6)]">
+            <span className="text-white mr-16 tracking-[0.1em]">RÉGUA = 1 GIRO</span>
+            <span className="text-white tracking-[0.1em]">METRO = 2 GIROS</span>
           </div>
         </div>
 

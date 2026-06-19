@@ -12,24 +12,13 @@ export default defineConfig(() => {
       tailwindcss(),
       legacy({
         targets: ['chrome >= 61', 'safari >= 11', 'ios >= 11'],
-        additionalLegacyPolyfills: ['regenerator-runtime/runtime']
       })
     ],
     build: {
       target: 'es2015',
       cssTarget: 'chrome61',
+      minify: 'esbuild', // Faster and more stable for GH Actions
       reportCompressedSize: false,
-      minify: 'terser' as const,
-      terserOptions: {
-        compress: {
-          drop_console: true,
-        },
-      },
-      rollupOptions: {
-        output: {
-          manualChunks: undefined,
-        },
-      },
     },
     resolve: {
       alias: {
