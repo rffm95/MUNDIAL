@@ -80,8 +80,8 @@ const RouletteWheel: React.FC<RouletteWheelProps> = ({ prizes, rotation }) => {
       </motion.div>
 
       {/* Static Indicator Arrow (Top) */}
-      <div className="absolute top-[-15px] left-1/2 -translate-x-1/2 z-30">
-        <div className="w-0 h-0 border-l-[20px] border-l-transparent border-r-[20px] border-r-transparent border-t-[35px] border-t-amber-500" />
+      <div className="absolute top-[-10px] left-1/2 -translate-x-1/2 z-30">
+        <div className="w-0 h-0 border-l-[15px] border-l-transparent border-r-[15px] border-r-transparent border-t-[30px] border-t-amber-500" />
       </div>
     </div>
   );

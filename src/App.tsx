@@ -90,13 +90,13 @@ export default function App() {
         {/* Background Branded Header */}
         <div className="z-10 text-center flex flex-col items-center">
           <h1 
-            className="text-white font-black text-8xl tracking-tighter uppercase italic mb-2"
+            className="text-white font-black text-[180px] leading-none tracking-tighter uppercase italic drop-shadow-2xl mb-8"
           >
             CHEERS O BAR
           </h1>
-          <div className="bg-amber-600 text-white font-black text-2xl px-10 py-3 rounded-full border-4 border-white/20">
-            <span className="text-white/60 mr-4 tracking-widest">RÉGUA = 1 GIRO</span>
-            <span className="text-white/60 tracking-widest">METRO = 2 GIROS</span>
+          <div className="bg-amber-600 text-white font-black text-4xl px-16 py-6 rounded-full border-8 border-white/20 shadow-2xl">
+            <span className="text-white mr-8 tracking-widest">RÉGUA = 1 GIRO</span>
+            <span className="text-white tracking-widest">METRO = 2 GIROS</span>
           </div>
         </div>
 
