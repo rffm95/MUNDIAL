@@ -65,43 +65,35 @@ const RouletteWheel: React.FC<RouletteWheelProps> = ({ prizes, rotation }) => {
   }, [prizes, segmentAngle]);
 
   return (
-    <div className="relative w-[600px] h-[600px] flex items-center justify-center">
+    <div className="relative w-[500px] h-[500px] flex items-center justify-center">
       {/* Simplified Outer Border */}
-      <div className="absolute inset-0 rounded-full border-[10px] border-amber-600 z-10" />
+      <div className="absolute inset-0 rounded-full border-[8px] border-amber-600 z-10 box-border" />
       
-      {/* The Spinning Core */}
+      {/* The Spinning Core - Optimized for low-end hardware */}
       <motion.div
         className="relative w-full h-full"
+        style={{ willChange: 'transform' }}
         animate={{ rotate: rotation }}
         transition={{ 
           duration: 6,
           ease: [0.12, 1, 0.22, 1] 
         }}
       >
-        <svg viewBox="-300 -300 600 600" className="w-full h-full overflow-visible">
-          <defs>
-            <radialGradient id="wheelGradient">
-              <stop offset="0%" stopColor="#222" />
-              <stop offset="100%" stopColor="#111" />
-            </radialGradient>
-          </defs>
+        <svg viewBox="-260 -260 520 520" className="w-full h-full overflow-visible">
+          <circle r="250" fill="#111" />
           
-          {/* Wheel Background Circle */}
-          <circle r="250" fill="url(#wheelGradient)" />
-          
-          {/* Segments - Rendered with simpler attributes */}
+          {/* Segments */}
           {segments}
           
-          {/* Center Hub */}
-          <circle r="40" fill="#1a1a1a" stroke="#d97706" strokeWidth="6" />
-          <circle r="30" fill="#d97706" />
+          {/* Center Hub - Simplified */}
+          <circle r="35" fill="#1a1a1a" stroke="#d97706" strokeWidth="4" />
+          <circle r="25" fill="#d97706" />
         </svg>
       </motion.div>
 
       {/* Static Indicator Arrow (Top) */}
-      <div className="absolute top-[-20px] left-1/2 -translate-x-1/2 z-30">
-        <div className="w-0 h-0 border-l-[25px] border-l-transparent border-r-[25px] border-r-transparent border-t-[40px] border-t-amber-500 relative">
-        </div>
+      <div className="absolute top-[-15px] left-1/2 -translate-x-1/2 z-30">
+        <div className="w-0 h-0 border-l-[20px] border-l-transparent border-r-[20px] border-r-transparent border-t-[35px] border-t-amber-500" />
       </div>
     </div>
   );
