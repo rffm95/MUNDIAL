@@ -1,15 +1,24 @@
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
+import legacy from '@vitejs/plugin-legacy';
 import path from 'path';
 import {defineConfig} from 'vite';
 
 export default defineConfig(() => {
   return {
     base: '/MUNDIAL/',
-    plugins: [react(), tailwindcss()],
+    plugins: [
+      react(), 
+      tailwindcss(),
+      legacy({
+        targets: ['chrome >= 60', 'safari >= 10', 'ios >= 10', 'ie >= 11'],
+        additionalLegacyPolyfills: ['regenerator-runtime/runtime']
+      })
+    ],
     build: {
       target: 'es2015',
-      cssTarget: 'chrome61', // Better compatibility for TV browsers
+      cssTarget: 'chrome61',
+      minify: 'terser' as const, // Fix type error by using const
     },
     resolve: {
       alias: {

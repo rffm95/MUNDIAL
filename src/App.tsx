@@ -11,7 +11,8 @@ import RouletteWheel from './components/RouletteWheel';
 import { PRIZES, Prize } from './types';
 
 export default function App() {
-  // TV Optimized Version - Path: /MUNDIAL/
+  // TV Optimized Version 2.1 (Legacy Fallbacks Enabled)
+  // Path: /MUNDIAL/
   const [rotation, setRotation] = useState(0);
   const [isSpinning, setIsSpinning] = useState(false);
   const [winner, setWinner] = useState<Prize | null>(null);
