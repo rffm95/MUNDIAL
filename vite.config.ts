@@ -11,14 +11,25 @@ export default defineConfig(() => {
       react(), 
       tailwindcss(),
       legacy({
-        targets: ['chrome >= 60', 'safari >= 10', 'ios >= 10', 'ie >= 11'],
+        targets: ['chrome >= 61', 'safari >= 11', 'ios >= 11'],
         additionalLegacyPolyfills: ['regenerator-runtime/runtime']
       })
     ],
     build: {
       target: 'es2015',
       cssTarget: 'chrome61',
-      minify: 'terser' as const, // Fix type error by using const
+      reportCompressedSize: false,
+      minify: 'terser' as const,
+      terserOptions: {
+        compress: {
+          drop_console: true,
+        },
+      },
+      rollupOptions: {
+        output: {
+          manualChunks: undefined,
+        },
+      },
     },
     resolve: {
       alias: {

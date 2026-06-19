@@ -1,5 +1,4 @@
 import React, { useMemo } from 'react';
-import { motion } from 'motion/react';
 import { Prize } from '../types';
 
 interface RouletteWheelProps {
@@ -57,14 +56,13 @@ const RouletteWheel: React.FC<RouletteWheelProps> = ({ prizes, rotation }) => {
       {/* Simplified Outer Border */}
       <div className="absolute inset-0 rounded-full border-[8px] border-amber-600 z-10 box-border" />
       
-      {/* The Spinning Core - Optimized for low-end hardware */}
-      <motion.div
+      {/* Pure CSS rotation for smoother TV performance */}
+      <div
         className="relative w-full h-full"
-        style={{ willChange: 'transform' }}
-        animate={{ rotate: rotation }}
-        transition={{ 
-          duration: 6,
-          ease: [0.12, 1, 0.22, 1] 
+        style={{ 
+          transform: `rotate(${rotation}deg)`,
+          transition: 'transform 6s cubic-bezier(0.12, 1, 0.22, 1)',
+          willChange: 'transform'
         }}
       >
         <svg viewBox="-260 -260 520 520" className="w-full h-full overflow-visible">
@@ -77,7 +75,7 @@ const RouletteWheel: React.FC<RouletteWheelProps> = ({ prizes, rotation }) => {
           <circle r="35" fill="#1a1a1a" stroke="#d97706" strokeWidth="4" />
           <circle r="25" fill="#d97706" />
         </svg>
-      </motion.div>
+      </div>
 
       {/* Static Indicator Arrow (Top) */}
       <div className="absolute top-[-10px] left-1/2 -translate-x-1/2 z-30">

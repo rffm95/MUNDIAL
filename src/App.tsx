@@ -4,9 +4,8 @@
  */
 
 import { useState, useCallback, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
 import confetti from 'canvas-confetti';
-import { Beer, Trophy, Star, ShieldCheck, MapPin } from 'lucide-react';
+import { ShieldCheck } from 'lucide-react';
 import RouletteWheel from './components/RouletteWheel';
 import { PRIZES, Prize } from './types';
 
@@ -53,10 +52,14 @@ export default function App() {
   // Global Key & Click Listeners for Total UI Trigger
   useEffect(() => {
     const handleAction = () => {
-      // Auto-fullscreen attempt
-      const doc = document.documentElement;
-      if (doc.requestFullscreen) {
-        doc.requestFullscreen().catch(() => {});
+      // Auto-fullscreen attempt for TV engagement
+      try {
+        const doc = document.documentElement;
+        if (doc.requestFullscreen) {
+          doc.requestFullscreen().catch(() => {});
+        }
+      } catch (e) {
+        // Fullscreen might be blocked, ignore
       }
 
       if (showOverlay) {
@@ -66,117 +69,124 @@ export default function App() {
       }
     };
 
-    const onKeyDown = (e: KeyboardEvent) => {
-      // TV Remote OK (13) or Enter
-      if (e.key === 'Enter' || e.keyCode === 13) {
-        handleAction();
-      }
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Any key or specifically Enter/OK (13)
+      handleAction();
     };
 
-    const onClick = () => handleAction();
+    const handleClick = () => handleAction();
 
-    window.addEventListener('keydown', onKeyDown);
-    window.addEventListener('click', onClick);
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('click', handleClick);
     return () => {
-      window.removeEventListener('keydown', onKeyDown);
-      window.removeEventListener('click', onClick);
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('click', handleClick);
     };
   }, [spin, isSpinning, showOverlay]);
 
   return (
     <div className="h-screen w-screen bg-black flex items-center justify-center overflow-hidden cursor-none select-none">
-      <div className="relative aspect-video h-full w-full p-12 flex flex-col items-center justify-between">
+      <div className="relative aspect-video h-full w-full p-16 flex flex-col items-center justify-between">
         
-        {/* Background Branded Header */}
+        {/* Massive Branded Header */}
         <div className="z-10 text-center flex flex-col items-center">
           <h1 
-            className="text-white font-black text-[180px] leading-none tracking-tighter uppercase italic drop-shadow-2xl mb-8"
+            className="text-white font-black text-[220px] leading-[0.8] tracking-tighter uppercase italic mb-12 drop-shadow-[0_20px_20px_rgba(0,0,0,0.5)]"
           >
             CHEERS O BAR
           </h1>
-          <div className="bg-amber-600 text-white font-black text-4xl px-16 py-6 rounded-full border-8 border-white/20 shadow-2xl">
-            <span className="text-white mr-8 tracking-widest">RÉGUA = 1 GIRO</span>
+          <div className="bg-amber-600 text-white font-black text-5xl px-20 py-8 rounded-full border-[10px] border-white/30 shadow-[0_0_80px_rgba(217,119,6,0.5)]">
+            <span className="text-white mr-12 tracking-widest">RÉGUA = 1 GIRO</span>
             <span className="text-white tracking-widest">METRO = 2 GIROS</span>
           </div>
         </div>
 
-        {/* Game Stage */}
-        <div className="flex-1 w-full flex items-center justify-center relative">
+        {/* Game Stage - No motion wrapper for state container to avoid lag */}
+        <div className="flex-1 w-full flex items-center justify-center relative scale-110">
           <RouletteWheel prizes={PRIZES} rotation={rotation} />
           
           <div className={`
             absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-40
-            w-28 h-28 rounded-full border-8 border-black/20 bg-white shadow-2xl
+            w-32 h-32 rounded-full border-[10px] border-black/30 bg-white shadow-2xl
             flex items-center justify-center
           `}>
-             <span className="text-black font-black text-2xl uppercase tracking-tighter">
+             <span className="text-black font-black text-3xl uppercase tracking-tighter">
                 {isSpinning ? "..." : "GIRAR"}
              </span>
           </div>
         </div>
 
-        {/* Footer Brand Assets */}
-        <div className="z-10 w-full flex justify-between items-center opacity-80 px-20">
+        {/* Brand Assets High Contrast */}
+        <div className="z-10 w-full flex justify-between items-center opacity-90 px-32 mb-4">
            <div className="flex flex-col">
-              <span className="text-amber-500 font-bold text-xs uppercase">Cerveja Oficial</span>
-              <span className="text-5xl font-black italic text-white tracking-widest leading-none">SAGRES</span>
+              <span className="text-amber-500 font-bold text-sm uppercase tracking-[0.2em] mb-1">Cerveja Oficial</span>
+              <span className="text-6xl font-black italic text-white tracking-widest leading-none">SAGRES</span>
            </div>
            
            <div className="flex flex-col items-center">
-              <ShieldCheck className="text-amber-500 mb-2" size={32} />
-              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/40">Beba com Responsabilidade</p>
+              <ShieldCheck className="text-amber-500 mb-2" size={40} />
+              <p className="text-[12px] font-bold uppercase tracking-[0.3em] text-white/60">Beba com Responsabilidade</p>
            </div>
 
            <div className="flex flex-col text-right">
-              <span className="text-emerald-500 font-bold text-xs uppercase">Sponsor Global</span>
-              <span className="text-5xl font-black italic text-white tracking-widest leading-none">HEINEKEN</span>
+              <span className="text-emerald-500 font-bold text-sm uppercase tracking-[0.2em] mb-1">Sponsor Global</span>
+              <span className="text-6xl font-black italic text-white tracking-widest leading-none">HEINEKEN</span>
            </div>
         </div>
 
-        {/* Win Notification */}
-        <AnimatePresence>
-          {showOverlay && winner && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="absolute inset-0 z-50 flex items-center justify-center bg-black/95 transition-opacity"
+        {/* Win Notification - Pure CSS transitions for zero lag */}
+        {showOverlay && winner && (
+          <div
+            className="absolute inset-0 z-50 flex items-center justify-center bg-black/95 transition-opacity"
+            style={{ 
+              animation: 'fadeIn 0.3s ease-out forwards'
+            }}
+          >
+            <div
+              className={`
+                p-20 rounded-[5rem] border-[12px] flex flex-col items-center text-center scale-125
+                ${winner.isWin ? 'bg-amber-600 border-white shadow-[0_0_150px_rgba(255,255,255,0.3)]' : 'bg-zinc-900 border-zinc-700 shadow-2xl'}
+              `}
+              style={{
+                animation: 'popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards'
+              }}
             >
-              <motion.div
-                initial={{ scale: 0.9 }}
-                animate={{ scale: 1 }}
-                className={`
-                  p-16 rounded-[4rem] border-8 flex flex-col items-center text-center
-                  ${winner.isWin ? 'bg-amber-600 border-white' : 'bg-zinc-900 border-zinc-700'}
-                `}
-              >
-                {winner.isWin ? (
-                  <>
-                    <h3 className="text-5xl font-bold text-white/80 mb-2 uppercase tracking-widest">PARABÉNS!</h3>
-                    <h2 className="text-[120px] font-black italic text-white leading-none mb-8">
-                       {winner.award}
-                    </h2>
-                    <div className="flex items-center bg-white/20 px-8 py-4 rounded-3xl border-2 border-white/40">
-                       <img src={winner.flag} className="w-16 h-10 object-cover mr-6 rounded shadow-lg" alt="" />
-                       <span className="text-4xl font-bold text-white tracking-widest">{winner.country}</span>
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <h2 className="text-[100px] font-black italic text-white leading-none mb-4 uppercase">AZAR!</h2>
-                    <p className="text-4xl font-bold text-white/50 uppercase tracking-widest">Tenta outra vez!</p>
-                  </>
-                )}
-                
-                <div className="mt-12 text-white/40 font-bold text-xl uppercase tracking-widest animate-pulse font-mono">
-                  CLIQUE NO OK PARA CONTINUAR
-                </div>
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
+              {winner.isWin ? (
+                <>
+                  <h3 className="text-6xl font-bold text-white/80 mb-4 uppercase tracking-[0.3em]">PARABÉNS!</h3>
+                  <h2 className="text-[160px] font-black italic text-white leading-none mb-12 drop-shadow-2xl">
+                     {winner.award}
+                  </h2>
+                  <div className="flex items-center bg-white/20 px-12 py-6 rounded-3xl border-4 border-white/40">
+                     <img src={winner.flag} className="w-24 h-16 object-cover mr-8 rounded shadow-2xl" alt="" />
+                     <span className="text-6xl font-bold text-white tracking-widest">{winner.country}</span>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <h2 className="text-[140px] font-black italic text-white leading-none mb-8 uppercase">AZAR!</h2>
+                  <p className="text-6xl font-bold text-white/50 uppercase tracking-widest">Tenta outra vez!</p>
+                </>
+              )}
+              
+              <div className="mt-16 text-white/60 font-bold text-3xl uppercase tracking-[0.4em] animate-pulse font-mono">
+                CLIQUE PARA CONTINUAR
+              </div>
+            </div>
+          </div>
+        )}
       </div>
+
+      <style>{`
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        @keyframes popIn {
+          from { transform: scale(0.8); opacity: 0; }
+          to { transform: scale(1.25); opacity: 1; }
+        }
+      `}</style>
     </div>
   );
 }
