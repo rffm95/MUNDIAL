@@ -40,10 +40,10 @@ export default function App() {
 
       if (actualWinner.isWin) {
         confetti({
-          particleCount: 80, // Reduced for TV stability
-          spread: 60,
+          particleCount: 40, // More stable for TV
+          spread: 50,
           origin: { y: 0.6 },
-          colors: ['#d97706', '#e42518', '#ffffff'],
+          colors: ['#d97706', '#ffffff'],
           zIndex: 100,
         });
       }
@@ -89,13 +89,11 @@ export default function App() {
         
         {/* Background Branded Header */}
         <div className="z-10 text-center flex flex-col items-center">
-          <motion.h1 
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            className="text-white font-black text-8xl tracking-tighter uppercase italic drop-shadow-2xl mb-2"
+          <h1 
+            className="text-white font-black text-8xl tracking-tighter uppercase italic mb-2"
           >
             CHEERS O BAR
-          </motion.h1>
+          </h1>
           <div className="bg-amber-600 text-white font-black text-2xl px-10 py-3 rounded-full border-4 border-white/20">
             <span className="text-white/60 mr-4 tracking-widest">RÉGUA = 1 GIRO</span>
             <span className="text-white/60 tracking-widest">METRO = 2 GIROS</span>

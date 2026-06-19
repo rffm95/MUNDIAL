@@ -31,7 +31,7 @@ const RouletteWheel: React.FC<RouletteWheelProps> = ({ prizes, rotation }) => {
               fontSize="14"
               fontWeight="bold"
               textAnchor="middle"
-              className="select-none font-sans uppercase tracking-widest drop-shadow-lg"
+              className="select-none font-sans uppercase tracking-widest"
               transform="rotate(0)"
             >
               {prize.country || "Tenta"}
@@ -41,23 +41,11 @@ const RouletteWheel: React.FC<RouletteWheelProps> = ({ prizes, rotation }) => {
               fontSize="10"
               fontWeight="normal"
               textAnchor="middle"
-              className="select-none font-sans opacity-80 drop-shadow-md"
+              className="select-none font-sans opacity-80"
               transform="translate(0, 15)"
             >
               {prize.award || "outra vez"}
             </text>
-            
-            {prize.flag && (
-              <image
-                href={prize.flag}
-                x="-15"
-                y="-50"
-                width="30"
-                height="20"
-                preserveAspectRatio="xMidYMid slice"
-                className="rounded-sm"
-              />
-            )}
           </g>
         </g>
       );
