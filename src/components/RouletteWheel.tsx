@@ -52,7 +52,7 @@ const RouletteWheel: React.FC<RouletteWheelProps> = ({ prizes, rotation }) => {
   }, [prizes, segmentAngle]);
 
   return (
-    <div className="relative w-[500px] h-[500px] flex items-center justify-center">
+    <div className="relative w-[440px] h-[440px] flex items-center justify-center">
       {/* Simplified Outer Border */}
       <div className="absolute inset-0 rounded-full border-[8px] border-amber-600 z-10 box-border" />
       

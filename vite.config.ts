@@ -17,7 +17,7 @@ export default defineConfig(() => {
     build: {
       target: 'es2015',
       cssTarget: 'chrome61',
-      minify: 'esbuild', // Faster and more stable for GH Actions
+      minify: 'esbuild' as const, // Faster and more stable for GH Actions
       reportCompressedSize: false,
     },
     resolve: {
