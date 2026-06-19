@@ -5,8 +5,12 @@ import {defineConfig} from 'vite';
 
 export default defineConfig(() => {
   return {
-    base: '/ROULLETA-MUNDIAL/',
+    base: '/MUNDIAL/',
     plugins: [react(), tailwindcss()],
+    build: {
+      target: 'es2015',
+      cssTarget: 'chrome61', // Better compatibility for TV browsers
+    },
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),
