@@ -24,27 +24,60 @@ const RouletteWheel: React.FC<RouletteWheelProps> = ({ prizes, rotation }) => {
           />
           
           {/* Text and Icon Container */}
-          <g transform={`rotate(${segmentAngle / 2} 0 0) translate(0, -160)`}>
-            <text
-              fill="white"
-              fontSize="14"
-              fontWeight="bold"
-              textAnchor="middle"
-              className="select-none font-sans uppercase tracking-widest"
-              transform="rotate(0)"
-            >
-              {prize.country || "Tenta"}
-            </text>
-            <text
-              fill="white"
-              fontSize="10"
-              fontWeight="normal"
-              textAnchor="middle"
-              className="select-none font-sans opacity-80"
-              transform="translate(0, 15)"
-            >
-              {prize.award || "outra vez"}
-            </text>
+          <g transform={`rotate(${segmentAngle / 2} 0 0) translate(0, -135)`}>
+            {prize.flag ? (
+              <>
+                {/* Background border and flag for country slice */}
+                <rect x="-24" y="-72" width="48" height="32" fill="white" rx="3" />
+                <image href={prize.flag} x="-22" y="-70" width="44" height="28" preserveAspectRatio="none" />
+                
+                <text
+                  fill="white"
+                  fontSize="17"
+                  fontWeight="900"
+                  textAnchor="middle"
+                  className="select-none font-sans uppercase tracking-wider"
+                  y="-22"
+                >
+                  {prize.country}
+                </text>
+                
+                <text
+                  fill="#ffc400"
+                  fontSize="12.5"
+                  fontWeight="900"
+                  textAnchor="middle"
+                  className="select-none font-sans uppercase tracking-[0.05em]"
+                  y="2"
+                >
+                  {prize.award}
+                </text>
+              </>
+            ) : (
+              <>
+                {/* "Tenta outra vez" segment */}
+                <text
+                  fill="#9ca3af"
+                  fontSize="16"
+                  fontWeight="900"
+                  textAnchor="middle"
+                  className="select-none font-sans uppercase tracking-wider"
+                  y="-30"
+                >
+                  TENTA
+                </text>
+                <text
+                  fill="#9ca3af"
+                  fontSize="13"
+                  fontWeight="800"
+                  textAnchor="middle"
+                  className="select-none font-sans uppercase tracking-wider"
+                  y="-10"
+                >
+                  OUTRA VEZ
+                </text>
+              </>
+            )}
           </g>
         </g>
       );

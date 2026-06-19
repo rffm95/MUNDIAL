@@ -101,19 +101,84 @@ export default function App() {
           </div>
         </div>
 
-        {/* Game Stage - Ultra Lighter Version */}
-        <div className="flex-1 w-full flex items-center justify-center relative">
-          <RouletteWheel prizes={PRIZES} rotation={rotation} />
+        {/* Game Stage - Ultra Lighter Version with side panels */}
+        <div className="flex-1 w-full flex items-center justify-between px-16 relative">
           
-          <div className={`
-            absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-40
-            w-28 h-28 rounded-full border-[10px] border-black/30 bg-white shadow-2xl
-            flex items-center justify-center
-          `}>
-             <span className="text-black font-black text-2xl uppercase tracking-tighter">
-                {isSpinning ? "..." : "GIRAR"}
-             </span>
+          {/* Left Side Panel - Prizes 1 */}
+          <div className="w-[340px] flex flex-col gap-6 text-left z-20">
+            <div className="border-b-4 border-amber-500 pb-3 mb-1">
+              <h3 className="text-amber-500 font-black text-2xl tracking-widest uppercase italic">
+                PRÉMIOS GRUPO A
+              </h3>
+            </div>
+            
+            {PRIZES.filter(p => p.isWin).slice(0, 3).map((prize) => (
+              <div 
+                key={prize.id} 
+                className="bg-zinc-900/90 border-4 border-white/10 rounded-[2rem] p-5 flex items-center gap-5 shadow-[0_15px_30px_rgba(0,0,0,0.5)] hover:border-amber-500/50 transition-all duration-300"
+              >
+                <img 
+                  src={prize.flag} 
+                  className="w-16 h-11 object-cover rounded shadow-md border-2 border-white/20" 
+                  alt="" 
+                />
+                <div className="flex flex-col">
+                  <span className="text-white font-black text-2xl tracking-wide uppercase leading-none mb-1">
+                    {prize.country}
+                  </span>
+                  <span className="text-amber-400 font-extrabold text-xl leading-none">
+                    {prize.award}
+                  </span>
+                </div>
+              </div>
+            ))}
           </div>
+
+          {/* Central Roulette */}
+          <div className="relative flex items-center justify-center">
+            <RouletteWheel prizes={PRIZES} rotation={rotation} />
+            
+            <div className={`
+              absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-40
+              w-24 h-24 rounded-full border-[8px] border-black/30 bg-white shadow-2xl
+              flex items-center justify-center
+            `}>
+               <span className="text-black font-black text-xl uppercase tracking-tighter">
+                  {isSpinning ? "..." : "GIRAR"}
+               </span>
+            </div>
+          </div>
+
+          {/* Right Side Panel - Prizes 2 */}
+          <div className="w-[340px] flex flex-col gap-6 text-right z-20">
+            <div className="border-b-4 border-emerald-500 pb-3 mb-1">
+              <h3 className="text-emerald-500 font-black text-2xl tracking-widest uppercase italic">
+                PRÉMIOS GRUPO B
+              </h3>
+            </div>
+            
+            {PRIZES.filter(p => p.isWin).slice(3, 6).map((prize) => (
+              <div 
+                key={prize.id} 
+                className="bg-zinc-900/90 border-4 border-white/10 rounded-[2rem] p-5 flex items-center justify-start gap-5 flex-row-reverse shadow-[0_15px_30px_rgba(0,0,0,0.5)] hover:border-emerald-500/50 transition-all duration-300"
+              >
+                <img 
+                  src={prize.flag} 
+                  className="w-16 h-11 object-cover rounded shadow-md border-2 border-white/20" 
+                  alt="" 
+                />
+                <div className="flex flex-col text-right">
+                  <span className="text-white font-black text-2xl tracking-wide uppercase leading-none mb-1">
+                    {prize.country}
+                  </span>
+                  <span className="text-amber-400 font-extrabold text-xl leading-none">
+                    {prize.award}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+
         </div>
 
         {/* Brand Assets High Contrast */}
