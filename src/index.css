@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+body {
+  background-color: #000000;
+  color: white;
+  margin: 0;
+  overflow: hidden;
+  font-family: var(--font-sans);
+}
+
+.glow-text {
+  /* Simplified for TV performance */
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.world-cup-gradient {
+  background: #0c0c0c;
+}
+

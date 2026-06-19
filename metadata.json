@@ -1,0 +1,6 @@
+{
+  "name": "Cheers O Bar Roulette",
+  "description": "A high-contrast World Cup 2026 roulette game for winning free Sagres and Heineken beers at Cheers O Bar.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
