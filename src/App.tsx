@@ -91,26 +91,26 @@ export default function App() {
         {/* Massive Branded Header */}
         <div className="z-10 text-center flex flex-col items-center">
           <h1 
-            className="text-white font-black text-[250px] leading-[0.7] tracking-tighter uppercase italic mb-16 drop-shadow-[5px_25px_35px_rgba(0,0,0,0.8)]"
+            className="text-white font-black text-[280px] leading-[0.65] tracking-tighter uppercase italic mb-20 drop-shadow-[10px_35px_45px_rgba(0,0,0,0.9)]"
           >
             CHEERS O BAR
           </h1>
-          <div className="bg-amber-600 text-white font-black text-6xl px-24 py-10 rounded-full border-[12px] border-white/40 shadow-[0_0_100px_rgba(217,119,6,0.6)]">
+          <div className="bg-amber-600 text-white font-black text-6xl px-28 py-12 rounded-full border-[15px] border-white/50 shadow-[0_0_120px_rgba(217,119,6,0.7)]">
             <span className="text-white mr-16 tracking-[0.1em]">RÉGUA = 1 GIRO</span>
             <span className="text-white tracking-[0.1em]">METRO = 2 GIROS</span>
           </div>
         </div>
 
-        {/* Game Stage - No motion wrapper for state container to avoid lag */}
-        <div className="flex-1 w-full flex items-center justify-center relative scale-110">
+        {/* Game Stage - Ultra Lighter Version */}
+        <div className="flex-1 w-full flex items-center justify-center relative scale-125">
           <RouletteWheel prizes={PRIZES} rotation={rotation} />
           
           <div className={`
             absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-40
-            w-32 h-32 rounded-full border-[10px] border-black/30 bg-white shadow-2xl
+            w-36 h-36 rounded-full border-[12px] border-black/40 bg-white shadow-2xl
             flex items-center justify-center
           `}>
-             <span className="text-black font-black text-3xl uppercase tracking-tighter">
+             <span className="text-black font-black text-4xl uppercase tracking-tighter">
                 {isSpinning ? "..." : "GIRAR"}
              </span>
           </div>
